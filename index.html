@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our 7th Anniversary ♡</title>
+
+  <!-- Google Fonts for Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & GLOBAL STYLES
+       ========================================================================== */
+    :root {
+      --bg-cream: #FAF6F0;
+      --warm-cream: #F3ECE1;
+      --soft-blush: #F4E3E3;
+      --champagne: #E8D8C8;
+      --deep-burgundy: #4A121A;
+      --burgundy-light: #6B1D28;
+      --gold-accent: #C5A059;
+      --gold-glow: rgba(197, 160, 89, 0.4);
+      --text-dark: #2C1A1D;
+      --text-muted: #6E5D60;
+      --white: #FFFFFF;
+      --card-shadow: 0 15px 35px rgba(74, 18, 26, 0.12);
+      --gold-border: 1px solid rgba(197, 160, 89, 0.3);
+      
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-header: 'Cinzel', serif;
+      --font-sans: 'Montserrat', sans-serif;
+
+      --transition-speed: 0.6s;
+    }
+
+    /* Reset & Base Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: var(--font-sans);
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Ambient Animated Background Canvas */
+    #ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Audio Control Toggle */
+    .audio-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      background: rgba(250, 246, 240, 0.85);
+      border: 1px solid var(--gold-accent);
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      color: var(--deep-burgundy);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    .audio-control:hover {
+      background: var(--deep-burgundy);
+      color: var(--warm-cream);
+    }
+
+    /* Section Navigation Container */
+    .app-container {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Generic Page Section Styles */
+    .page-section {
+      width: 100%;
+      max-width: 800px;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: absolute;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+      padding: 2rem 1rem;
+    }
+
+    .page-section.hidden {
+      opacity: 0;
+      transform: translateY(30px);
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    /* Back Navigation Button */
+    .back-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: transparent;
+      border: none;
+      color: var(--deep-burgundy);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    .back-btn:hover {
+      opacity: 1;
+    }
+
+    /* Typography Utilities */
+    .serif-title {
+      font-family: var(--font-serif);
+      color: var(--deep-burgundy);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .header-subtitle {
+      font-family: var(--font-header);
+      letter-spacing: 2px;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Button Styles */
+    .nav-btn {
+      margin-top: 2rem;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: none;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(74, 18, 26, 0.15);
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--deep-burgundy), var(--burgundy-light));
+      color: var(--warm-cream);
+    }
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(74, 18, 26, 0.25);
+      background: linear-gradient(135deg, var(--burgundy-light), var(--deep-burgundy));
+    }
+    .primary-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .secondary-btn {
+      background: transparent;
+      border: 1px solid var(--gold-accent);
+      color: var(--deep-burgundy);
+    }
+    .secondary-btn:hover {
+      background: rgba(197, 160, 89, 0.1);
+    }
+
+    /* ==========================================================================
+       SECTION 1: 3D FLIP INVITATION CARD
+       ========================================================================== */
+    .card-scene {
+      width: 320px;
+      height: 460px;
+      perspective: 1200px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .invitation-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .card-scene.open .invitation-card {
+      transform: rotateY(-180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid var(--champagne);
+    }
+
+    .card-front {
+      background: linear-gradient(145deg, var(--warm-cream), var(--bg-cream));
+      position: relative;
+      overflow: hidden;
+    }
+    .card-front::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid var(--gold-accent);
+      border-radius: 10px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .card-back {
+      background: linear-gradient(145deg, var(--deep-burgundy), #320a10);
+      color: var(--warm-cream);
+      transform: rotateY(180deg);
+    }
+    .card-back::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid var(--gold-accent);
+      border-radius: 10px;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .tap-instruction {
+      font-size: 0.85rem;
+      color: var(--gold-accent);
+      letter-spacing: 1px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* ==========================================================================
+       SECTION 2: ANNIVERSARY MESSAGE
+       ========================================================================== */
+    .typewriter-container {
+      max-width: 600px;
+      margin: 1.5rem auto;
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: var(--text-dark);
+      min-height: 120px;
+      line-height: 1.8;
+    }
+
+    /* ==========================================================================
+       SECTION 3: RESTAURANT SELECTION
+       ========================================================================== */
+    .restaurant-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 650px) {
+      .restaurant-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .restaurant-card {
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      border: var(--gold-border);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .restaurant-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px rgba(74, 18, 26, 0.1);
+    }
+
+    .restaurant-card.selected {
+      border: 2px solid var(--gold-accent);
+      box-shadow: 0 0 20px var(--gold-glow);
+      background: #FFFDF9;
+    }
+
+    .restaurant-img-wrapper {
+      width: 100%;
+      height: 160px;
+      position: relative;
+      background-color: var(--champagne);
+    }
+
+    .restaurant-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .selection-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--gold-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--deep-burgundy);
+      transition: all 0.3s ease;
+    }
+
+    .restaurant-card.selected .selection-badge {
+      background: var(--gold-accent);
+      color: var(--white);
+    }
+
+    .restaurant-info {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .restaurant-info h3 {
+      font-family: var(--font-serif);
+      color: var(--deep-burgundy);
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .restaurant-info p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .restaurant-links {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(197, 160, 89, 0.2);
+      display: flex;
+      gap: 12px;
+      font-size: 0.8rem;
+    }
+
+    .restaurant-links a {
+      color: var(--gold-accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .restaurant-links a:hover {
+      color: var(--deep-burgundy);
+      text-decoration: underline;
+    }
+
+    .selection-feedback {
+      height: 24px;
+      margin-top: 1rem;
+      font-family: var(--font-serif);
+      color: var(--deep-burgundy);
+      font-style: italic;
+    }
+
+    /* ==========================================================================
+       SECTION 4: OUTFIT MOODBOARD
+       ========================================================================== */
+    .outfit-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem;
+      border: var(--gold-border);
+      box-shadow: var(--card-shadow);
+      max-width: 500px;
+      width: 100%;
+      margin: 1.5rem auto;
+    }
+
+    .outfit-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+
+    .tag {
+      background: var(--warm-cream);
+      color: var(--deep-burgundy);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+    }
+
+    /* ==========================================================================
+       SECTION 5: FINAL ROMANTIC SCREEN
+       ========================================================================== */
+    .final-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(243,236,225,0.9));
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      border: 1px solid var(--gold-accent);
+      box-shadow: 0 20px 40px rgba(74, 18, 26, 0.12);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 550px;
+    }
+
+    .final-reveal-text {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 0.8s ease;
+    }
+
+    .final-reveal-text.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .chosen-summary {
+      margin: 1.5rem 0;
+      padding: 12px 20px;
+      background: var(--warm-cream);
+      border-radius: 30px;
+      display: inline-block;
+      font-size: 0.95rem;
+      color: var(--deep-burgundy);
+      border: 1px dashed var(--gold-accent);
+    }
+
+    /* Secret Modal Letter */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(44, 26, 29, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--bg-cream);
+      padding: 2.5rem;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      border: 2px solid var(--gold-accent);
+      position: relative;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    /* Accessibility Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Particle Canvas Background -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Ambient Sound Controls -->
+  <button id="audio-toggle" class="audio-control" aria-label="Toggle ambient sound">
+    <span id="audio-icon">🎵</span> <span id="audio-text">Sound: Off</span>
+  </button>
+
+  <main class="app-container">
+
+    <!-- ==========================================================================
+       SECTION 1: INVITATION CARD
+       ========================================================================== -->
+    <section id="section-1" class="page-section" aria-label="Anniversary Invitation">
+      <div class="header-subtitle">A Special Invitation</div>
+      <h1 class="serif-title" style="margin-bottom: 0.2rem;">Our Anniversary</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">7 Years of Us</p>
+
+      <div class="card-scene" id="card-trigger" role="button" tabindex="0" aria-label="Open anniversary invitation card">
+        <div class="invitation-card">
+          <!-- Front Face -->
+          <div class="card-face card-front">
+            <div style="font-size: 1.8rem; color: var(--gold-accent);">♡</div>
+            <div>
+              <p style="font-family: var(--font-header); letter-spacing: 3px; font-size: 0.8rem; color: var(--text-muted);">FOR MY FAVORITE PERSON</p>
+              <h2 style="font-family: var(--font-serif); color: var(--deep-burgundy); margin-top: 5px;">7th Chapter</h2>
+            </div>
+            <div class="tap-instruction">Tap the invitation, darling ♡</div>
+          </div>
+
+          <!-- Back Face -->
+          <div class="card-face card-back">
+            <div style="font-size: 2rem;">✨</div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.5rem;">You are invited</h3>
+            <p style="font-size: 0.85rem; opacity: 0.9;">To celebrate seven wonderful years together.</p>
+            <div style="font-size: 0.8rem; color: var(--gold-accent);">♡</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       SECTION 2: ANNIVERSARY MESSAGE
+       ========================================================================== -->
+    <section id="section-2" class="page-section hidden" aria-label="Anniversary Message">
+      <button class="back-btn" data-target="section-1" aria-label="Go back">← Back</button>
+      
+      <div class="header-subtitle">Hello Darling ❤️</div>
+      <h2 class="serif-title">Happy Anniversary</h2>
+
+      <div class="typewriter-container" id="typewriter-text"></div>
+
+      <button id="to-section-3" class="nav-btn primary-btn hidden">
+        Continue, Darling →
+      </button>
+    </section>
+
+    <!-- ==========================================================================
+       SECTION 3: RESTAURANT SELECTION
+       ========================================================================== -->
+    <section id="section-3" class="page-section hidden" aria-label="Restaurant Selection">
+      <button class="back-btn" data-target="section-2" aria-label="Go back">← Back</button>
+
+      <h2 class="serif-title" style="font-size: clamp(1.8rem, 4vw, 2.5rem);">So… where do you want to eat, darling?</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Pick the vibe for our special night ♡</p>
+
+      <div class="restaurant-grid">
+        
+        <!-- 1. Roof Manila -->
+        <div class="restaurant-card" data-restaurant="Roof Manila" tabindex="0" role="radio" aria-checked="false">
+          <div class="restaurant-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Roof Manila Rooftop Atmosphere">
+            <div class="selection-badge">✓</div>
+          </div>
+          <div class="restaurant-info">
+            <div>
+              <h3>Roof Manila</h3>
+              <p>An intimate rooftop experience with stunning city skyline views and cozy ambient lighting.</p>
+            </div>
+            <div class="restaurant-links">
+              <a href="https://www.google.com/maps/search/Roof+Manila" target="_blank" rel="noopener">📍 Location</a>
+              <a href="https://www.facebook.com/roofmanila" target="_blank" rel="noopener">📖 View Menu</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Aya by Hapag -->
+        <div class="restaurant-card" data-restaurant="Aya by Hapag" tabindex="0" role="radio" aria-checked="false">
+          <div class="restaurant-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=80" alt="Aya by Hapag Fine Dining">
+            <div class="selection-badge">✓</div>
+          </div>
+          <div class="restaurant-info">
+            <div>
+              <h3>Aya by Hapag</h3>
+              <p>Modern Filipino fine dining with exquisite tasting menus and sophisticated cozy interiors.</p>
+            </div>
+            <div class="restaurant-links">
+              <a href="https://www.google.com/maps/search/Aya+by+Hapag" target="_blank" rel="noopener">📍 Location</a>
+              <a href="https://www.hapagmnl.com/aya" target="_blank" rel="noopener">📖 View Menu</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Encima Roofdeck -->
+        <div class="restaurant-card" data-restaurant="Encima Roofdeck" tabindex="0" role="radio" aria-checked="false">
+          <div class="restaurant-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=800&q=80" alt="Encima Roofdeck Restaurant">
+            <div class="selection-badge">✓</div>
+          </div>
+          <div class="restaurant-info">
+            <div>
+              <h3>Encima Roofdeck</h3>
+              <p>Tex-Mex fusion dishes paired with cool evening breezes and romantic open-air ambiance.</p>
+            </div>
+            <div class="restaurant-links">
+              <a href="https://www.google.com/maps/search/Encima+Roofdeck+Makati" target="_blank" rel="noopener">📍 Location</a>
+              <a href="https://www.facebook.com/EncimaRoofdeckRestaurant" target="_blank" rel="noopener">📖 View Menu</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Dillinger's 1903 -->
+        <div class="restaurant-card" data-restaurant="Dillinger's 1903" tabindex="0" role="radio" aria-checked="false">
+          <div class="restaurant-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Dillinger's 1903 Steakhouse Bar">
+            <div class="selection-badge">✓</div>
+          </div>
+          <div class="restaurant-info">
+            <div>
+              <h3>Dillinger's 1903</h3>
+              <p>Classic steakhouse & bar vibes, luxury comfort food, premium wines, and warm romantic lighting.</p>
+            </div>
+            <div class="restaurant-links">
+              <a href="https://www.google.com/maps/search/Dillingers+1903+Greenbelt" target="_blank" rel="noopener">📍 Location</a>
+              <a href="https://www.facebook.com/dillingers1903" target="_blank" rel="noopener">📖 View Menu</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="selection-feedback" id="restaurant-feedback"></div>
+
+      <button id="to-section-4" class="nav-btn primary-btn" disabled>
+        That’s our date spot →
+      </button>
+    </section>
+
+    <!-- ==========================================================================
+       SECTION 4: OUTFIT SECTION
+       ========================================================================== -->
+    <section id="section-4" class="page-section hidden" aria-label="Outfit Selection">
+      <button class="back-btn" data-target="section-3" aria-label="Go back">← Back</button>
+
+      <h2 class="serif-title">Now… what are we wearing?</h2>
+      
+      <div class="outfit-card">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">✨ 👟 🤍</div>
+        <h3 style="font-family: var(--font-header); letter-spacing: 2px; color: var(--gold-accent); font-size: 1rem;">THE RELAXED & COZY VIBE</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Casual & Comfortable</p>
+
+        <div class="outfit-tags">
+          <span class="tag">Soft Neutral Tones</span>
+          <span class="tag">Relaxed Silhouettes</span>
+          <span class="tag">Clean Sneakers</span>
+          <span class="tag">Minimal Accessories</span>
+        </div>
+
+        <p style="font-family: var(--font-serif); font-style: italic; color: var(--deep-burgundy); margin-top: 1rem;">
+          “Because tonight is about us, not the dress code.”
+        </p>
+      </div>
+
+      <button id="to-section-5" class="nav-btn primary-btn">
+        Ready for our date? ❤️
+      </button>
+    </section>
+
+    <!-- ==========================================================================
+       SECTION 5: FINAL ROMANTIC SCREEN
+       ========================================================================== -->
+    <section id="section-5" class="page-section hidden" aria-label="Final Date Confirmation">
+      <button class="back-btn" data-target="section-4" aria-label="Go back">← Back</button>
+
+      <div class="final-card">
+        <div class="final-reveal-text" id="final-reveal-1">
+          <h2 class="serif-title" style="font-size: 2.2rem;">It’s a date, darling. ❤️</h2>
+        </div>
+
+        <div class="chosen-summary final-reveal-text" id="chosen-summary">
+          Location: <strong id="summary-restaurant-name">Selected Spot</strong>
+        </div>
+
+        <div class="final-reveal-text" id="final-reveal-2" style="margin-top: 1rem;">
+          <p style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--deep-burgundy);">
+            I love you so much.
+          </p>
+          <p style="color: var(--gold-accent); letter-spacing: 1px; margin-top: 0.5rem; font-size: 0.95rem;">
+            Seven years down, forever to go.
+          </p>
+        </div>
+
+        <div class="final-reveal-text" id="final-reveal-3" style="margin-top: 2rem; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+          <button id="send-rsvp-btn" class="nav-btn primary-btn">
+            Send Choice via Messenger 💌
+          </button>
+
+          <button id="open-letter-btn" class="nav-btn secondary-btn">
+            Open My Love Letter ♡
+          </button>
+        </div>
+
+        <div style="margin-top: 2.5rem; font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-serif);">
+          ♡ Our story continues… ♡
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Love Letter Modal -->
+  <div class="modal-overlay" id="letter-modal">
+    <div class="modal-content">
+      <div style="font-size: 2rem; margin-bottom: 0.5rem;">💌</div>
+      <h3 style="font-family: var(--font-serif); color: var(--deep-burgundy); font-size: 1.5rem; margin-bottom: 1rem;">To My Favorite Person</h3>
+      <p style="font-size: 0.95rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 1.5rem;">
+        Seven years ago, my world got infinitely brighter. Thank you for all the endless laughter, quiet cozy evenings, unwavering support, and the love we grow every single day. I can't wait to celebrate tonight and continue building our beautiful future together.
+      </p>
+      <button id="close-modal-btn" class="nav-btn secondary-btn">Close ♡</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+     JAVASCRIPT LOGIC
+     ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // State Variables
+      let selectedRestaurant = null;
+      let audioCtx = null;
+      let isAudioPlaying = false;
+      let audioOscillator = null;
+
+      // Dynamic Typewriter Text
+      const romanticMessage = "Seven years of laughter, growth, and endless love, and my favorite place in the world is still right beside you.";
+
+      // Web Audio API Ambient Sound Generator (Soft romantic pad sound)
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+        }
+      }
+
+      function toggleAudio() {
+        initAudio();
+        const toggleBtnText = document.getElementById('audio-text');
+        
+        if (isAudioPlaying) {
+          if (audioOscillator) audioOscillator.stop();
+          isAudioPlaying = false;
+          toggleBtnText.textContent = "Sound: Off";
+        } else {
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          
+          // Simple soft harmonic ambient synth
+          audioOscillator = audioCtx.createOscillator();
+          const gainNode = audioCtx.createGain();
+          
+          audioOscillator.type = 'sine';
+          audioOscillator.frequency.setValueAtTime(220, audioCtx.currentTime); // A3 note
+          
+          gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 3);
+
+          audioOscillator.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+          
+          audioOscillator.start();
+          isAudioPlaying = true;
+          toggleBtnText.textContent = "Sound: On";
+        }
+      }
+
+      document.getElementById('audio-toggle').addEventListener('click', toggleAudio);
+
+      // Canvas Floating Hearts Background Animation
+      const canvas = document.getElementById('ambient-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      class HeartParticle {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + Math.random() * 100;
+          this.size = Math.random() * 12 + 6;
+          this.speedY = Math.random() * 0.8 + 0.3;
+          this.speedX = Math.sin(Math.random() * Math.PI) * 0.4;
+          this.opacity = Math.random() * 0.5 + 0.2;
+          this.color = Math.random() > 0.5 ? '#C5A059' : '#4A121A';
+        }
+        update() {
+          this.y -= this.speedY;
+          this.x += this.speedX;
+          if (this.y < -20) this.reset();
+        }
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          const topCurveHeight = this.size * 0.3;
+          ctx.moveTo(this.x, this.y + topCurveHeight);
+          ctx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + topCurveHeight);
+          ctx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x, this.y + this.size, this.x, this.y + this.size);
+          ctx.bezierCurveTo(this.x, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + topCurveHeight, this.x + this.size / 2, this.y + topCurveHeight);
+          ctx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + topCurveHeight);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      // Initialize Heart Particles
+      for (let i = 0; i < 25; i++) {
+        particles.push(new HeartParticle());
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+
+      // Burst Heart Effects on Interactions
+      function triggerBurst(x, y) {
+        for (let i = 0; i < 12; i++) {
+          const p = new HeartParticle();
+          p.x = x;
+          p.y = y;
+          p.speedY = (Math.random() - 0.5) * 3;
+          p.speedX = (Math.random() - 0.5) * 3;
+          p.opacity = 0.8;
+          particles.push(p);
+          setTimeout(() => {
+            const index = particles.indexOf(p);
+            if (index > -1) particles.splice(index, 1);
+          }, 1500);
+        }
+      }
+
+      // Section Navigation Logic
+      function showSection(sectionId) {
+        document.querySelectorAll('.page-section').forEach(sec => {
+          sec.classList.add('hidden');
+        });
+        
+        const target = document.getElementById(sectionId);
+        target.classList.remove('hidden');
+
+        // Trigger typewriter animation on Section 2
+        if (sectionId === 'section-2') {
+          typewriterEffect();
+        }
+
+        // Trigger staggered reveals on Section 5
+        if (sectionId === 'section-5') {
+          revealFinalScreen();
+        }
+      }
+
+      // Back Button Event Handling
+      document.querySelectorAll('.back-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const target = e.target.getAttribute('data-target');
+          showSection(target);
+        });
+      });
+
+      // SECTION 1: 3D Card Flip Handler
+      const cardTrigger = document.getElementById('card-trigger');
+      const cardScene = cardTrigger.querySelector('.invitation-card').parentElement;
+
+      function handleCardOpen(e) {
+        if (cardScene.classList.contains('open')) return;
+        cardScene.classList.add('open');
+
+        const rect = cardTrigger.getBoundingClientRect();
+        triggerBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+        setTimeout(() => {
+          showSection('section-2');
+        }, 1400);
+      }
+
+      cardTrigger.addEventListener('click', handleCardOpen);
+      cardTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCardOpen(e);
+        }
+      });
+
+      // SECTION 2: Typewriter Text Effect
+      let typewriterDone = false;
+      function typewriterEffect() {
+        if (typewriterDone) return;
+        
+        const container = document.getElementById('typewriter-text');
+        const nextBtn = document.getElementById('to-section-3');
+        container.innerHTML = "";
+        
+        let index = 0;
+        const speed = 40;
+
+        function type() {
+          if (index < romanticMessage.length) {
+            container.innerHTML += romanticMessage.charAt(index);
+            index++;
+            setTimeout(type, speed);
+          } else {
+            typewriterDone = true;
+            nextBtn.classList.remove('hidden');
+          }
+        }
+        type();
+      }
+
+      document.getElementById('to-section-3').addEventListener('click', () => {
+        showSection('section-3');
+      });
+
+      // SECTION 3: Restaurant Selection Handler
+      const restaurantCards = document.querySelectorAll('.restaurant-card');
+      const feedbackDiv = document.getElementById('restaurant-feedback');
+      const toSection4Btn = document.getElementById('to-section-4');
+
+      restaurantCards.forEach(card => {
+        function selectCard(e) {
+          // Exclude direct clicks on Map/Menu hyperlinks
+          if (e.target.tagName === 'A') return;
+
+          restaurantCards.forEach(c => {
+            c.classList.remove('selected');
+            c.setAttribute('aria-checked', 'false');
+          });
+
+          card.classList.add('selected');
+          card.setAttribute('aria-checked', 'true');
+
+          selectedRestaurant = card.getAttribute('data-restaurant');
+          feedbackDiv.textContent = `Good choice, darling ❤️ (${selectedRestaurant})`;
+          toSection4Btn.removeAttribute('disabled');
+
+          const rect = card.getBoundingClientRect();
+          triggerBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        }
+
+        card.addEventListener('click', selectCard);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectCard(e);
+          }
+        });
+      });
+
+      toSection4Btn.addEventListener('click', () => {
+        showSection('section-4');
+      });
+
+      // SECTION 4 -> SECTION 5 Transition
+      document.getElementById('to-section-5').addEventListener('click', () => {
+        showSection('section-5');
+      });
+
+      // SECTION 5: Final Reveal Animations & Interactivity
+      function revealFinalScreen() {
+        const summaryName = document.getElementById('summary-restaurant-name');
+        summaryName.textContent = selectedRestaurant ? selectedRestaurant : "Our Special Spot";
+
+        setTimeout(() => {
+          document.getElementById('final-reveal-1').classList.add('show');
+        }, 300);
+
+        setTimeout(() => {
+          document.getElementById('chosen-summary').classList.add('show');
+        }, 800);
+
+        setTimeout(() => {
+          document.getElementById('final-reveal-2').classList.add('show');
+        }, 1400);
+
+        setTimeout(() => {
+          document.getElementById('final-reveal-3').classList.add('show');
+          triggerBurst(window.innerWidth / 2, window.innerHeight / 2);
+        }, 2000);
+      }
+
+      // Send Choice via Messenger Button Link Handler
+      document.getElementById('send-rsvp-btn').addEventListener('click', () => {
+        const place = selectedRestaurant || 'our favorite spot';
+        const msg = encodeURIComponent(`Hi darling! I loved the invitation. Let's eat at ${place} for our 7th anniversary date! ❤️`);
+        
+        // Opens pre-filled share link
+        window.open(`https://m.me/?text=${msg}`, '_blank');
+      });
+
+      // Love Letter Modal Logic
+      const modal = document.getElementById('letter-modal');
+      document.getElementById('open-letter-btn').addEventListener('click', () => {
+        modal.classList.add('active');
+      });
+
+      document.getElementById('close-modal-btn').addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+      });
+
+    });
+  </script>
+</body>
+</html>
